@@ -8,6 +8,6 @@
     "start": "node index.js",
     "problem": "node problem.js"
   },
-  "author": "Ugioni",
+  "author": "Willian",
   "license": "MIT"
 }
