@@ -1,3 +1,3 @@
 # Design Patterns Examples
 
-Examples about some design patterns
+![alt text](image.png)
