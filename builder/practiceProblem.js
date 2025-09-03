@@ -97,6 +97,17 @@ class CarDirector {
       .addGPS()
       .build();
   }
+
+  static buildMercedesLuxo() {
+    return new CarBuilder()
+      .setBrand("Mercedes-Benz")
+      .setModel("Classe C")
+      .setYear(2025)
+      .setEngine("2.0 Turbo Híbrido")
+      .setColor("Azul Spectral")
+      .addGPS()
+      .build();
+  }
 }
 
 console.log("### Construindo carros manualmente com o Builder ###");
@@ -118,14 +129,27 @@ const car2_mustang = new CarBuilder()
   .setColor("Vermelho Racing")
   .addGPS()
   .build();
+  
+const car3_mobi = new CarBuilder()
+  .setBrand("Fiat")
+  .setModel("Mobi Like")
+  .setYear(2025)
+  .setEngine("1.0 Fire")
+  .setColor("Branco Banchisa")
+  .build();
 
 car1_corolla.showDetails();
 car2_mustang.showDetails();
+car3_mobi.showDetails();
+
 
 console.log("\n### Usando o Director para obter carros pré-configurados ###");
 
-const car3_civic = CarDirector.buildCivicIntermediario();
-const car4_compass = CarDirector.buildSuvTopDeLinha();
+const car4_civic = CarDirector.buildCivicIntermediario();
+const car5_compass = CarDirector.buildSuvTopDeLinha();
+const car6_mercedes = CarDirector.buildMercedesLuxo();
 
-car3_civic.showDetails();
-car4_compass.showDetails();
+
+car4_civic.showDetails();
+car5_compass.showDetails();
+car6_mercedes.showDetails();
