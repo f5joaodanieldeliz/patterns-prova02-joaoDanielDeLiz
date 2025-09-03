@@ -1,28 +1,131 @@
 class Car {
-  constructor(brand, model, year, engine, color, gps) {
-    this.brand = brand;
-    this.model = model;
-    this.year = year;
-    this.engine = engine;
-    this.color = color;
-    this.gps = gps;
+  constructor() {
+    this.brand = null;
+    this.model = null;
+    this.year = null;
+    this.engine = null;
+    this.color = null;
+    this.gps = false;
   }
 
   showDetails() {
-    console.log(
-      `${this.year} 
-      ${this.brand} 
-      ${this.model} 
-      - Motor: ${this.engine}, 
-      Cor: ${this.color}, 
-      GPS: ${this.gps ? "Sim" : "Não"}`
-    );
+    console.log(`
+--------------------
+Detalhes do Carro:
+  Ano: ${this.year} 
+  Marca: ${this.brand} 
+  Modelo: ${this.model} 
+  - Motor: ${this.engine}
+  - Cor: ${this.color}
+  - GPS: ${this.gps ? "Sim" : "Não"}
+--------------------`);
   }
 }
 
-// Cliente precisa lembrar a ordem e todos os parâmetros
-const car1 = new Car("Toyota", "Corolla", 2024, "2.0", "Preto", true);
-const car2 = new Car("Honda", "Civic", 2023, "1.5 Turbo", "Prata", false);
+class CarBuilder {
+  constructor() {
+    this.car = new Car();
+  }
 
-car1.showDetails();
-car2.showDetails();
+  setBrand(brand) {
+    this.car.brand = brand;
+    return this;
+  }
+
+  setModel(model) {
+    this.car.model = model;
+    return this;
+  }
+
+  setYear(year) {
+    this.car.year = year;
+    return this;
+  }
+
+  setEngine(engine) {
+    this.car.engine = engine;
+    return this;
+  }
+
+  setColor(color) {
+    this.car.color = color;
+    return this;
+  }
+
+  addGPS() {
+    this.car.gps = true;
+    return this;
+  }
+
+  build() {
+    if (!this.car.brand || !this.car.model || !this.car.year) {
+      throw new Error("Marca, modelo e ano são obrigatórios para construir um carro.");
+    }
+    return this.car;
+  }
+}
+
+class CarDirector {
+  static buildCorollaCompleto() {
+    return new CarBuilder()
+      .setBrand("Toyota")
+      .setModel("Corolla")
+      .setYear(2024)
+      .setEngine("2.0 Flex")
+      .setColor("Preto")
+      .addGPS()
+      .build();
+  }
+
+  static buildCivicIntermediario() {
+    return new CarBuilder()
+      .setBrand("Honda")
+      .setModel("Civic")
+      .setYear(2023)
+      .setEngine("1.5 Turbo")
+      .setColor("Prata")
+      .build();
+  }
+
+  static buildSuvTopDeLinha() {
+    return new CarBuilder()
+      .setBrand("Jeep")
+      .setModel("Compass")
+      .setYear(2025)
+      .setEngine("1.3 Turbo Flex")
+      .setColor("Cinza Granite")
+      .addGPS()
+      .build();
+  }
+}
+
+console.log("### Construindo carros manualmente com o Builder ###");
+
+const car1_corolla = new CarBuilder()
+  .setYear(2024)
+  .setBrand("Toyota")
+  .setModel("Corolla")
+  .setEngine("2.0")
+  .setColor("Preto")
+  .addGPS()
+  .build();
+
+const car2_mustang = new CarBuilder()
+  .setBrand("Ford")
+  .setModel("Mustang GT")
+  .setYear(2024)
+  .setEngine("5.0 V8")
+  .setColor("Vermelho Racing")
+  .addGPS()
+  .build();
+
+car1_corolla.showDetails();
+car2_mustang.showDetails();
+
+console.log("\n### Usando o Director para obter carros pré-configurados ###");
+
+const car3_civic = CarDirector.buildCivicIntermediario();
+const car4_compass = CarDirector.buildSuvTopDeLinha();
+
+car3_civic.showDetails();
+car4_compass.showDetails();
