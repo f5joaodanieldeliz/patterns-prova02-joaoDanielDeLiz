@@ -1,130 +1,110 @@
-// Produto
-class Computer {
-  constructor() {
-    this.cpu = null;
-    this.gpu = null;
-    this.ram = null;
-    this.storage = null;
-    this.powerSupply = null;
-    this.caseType = null;
-    this.os = null;
-    this.wifiCard = false;
+//Produto
+class Car {
+  constructor(brand, model, year, engine, color, gps) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+    this.engine = engine;
+    this.color = color;
+    this.gps = gps;
   }
 
-  showConfig() {
-    console.log(`
-    Computador configurado:
-    CPU: ${this.cpu}
-    GPU: ${this.gpu !== null ? this.gpu : "GPU integrado"}
-    RAM: ${this.ram !== null ? this.ram : "128MB"}
-    Armazenamento: ${this.storage}
-    Fonte: ${this.powerSupply}
-    Gabinete: ${this.caseType}
-    Sistema: ${this.os}
-    Wi-Fi: ${this.wifiCard ? "Sim" : "Não"}
-    `);
+  showDetails() {
+    console.log(
+      `${this.year} 
+      ${this.brand} 
+      ${this.model} 
+      - Motor: ${this.engine}, 
+      Cor: ${this.color}, 
+      GPS: ${this.gps ? "Sim" : "Não"}`
+    );
   }
 }
 
 // Builder
-class ComputerBuilder {
+class CarroBuilder {
   constructor() {
-    this.computer = new Computer();
+    this.carro = new Car();
   }
 
-  setProcessadorLogico(cpu) {
-    this.computer.cpu = cpu;
+  setbrand(brand) {
+    this.carro.brand = brand;
     return this;
   }
 
-  setGPU(gpu) {
-    this.computer.gpu = gpu;
+  setmodel(model) {
+    this.carro.model = model;
     return this;
   }
 
-  setRAM(ram) {
-    this.computer.ram = ram;
+  setyear(year) {
+    this.carro.year = year;
     return this;
   }
 
-  setStorage(storage) {
-    this.computer.storage = storage;
+  setengine(engine) {
+    this.carro.engine = engine;
     return this;
   }
 
-  setPowerSupply(power) {
-    this.computer.powerSupply = power;
+  setcolor(color) {
+    this.carro.color = color;
     return this;
   }
 
-  setCase(caseType) {
-    this.computer.caseType = caseType;
-    return this;
-  }
-
-  setOS(os) {
-    this.computer.os = os;
-    return this;
-  }
-
-  addWifiCard() {
-    this.computer.wifiCard = true;
+  setgps(gps) {
+    this.carro.gps = gps;
     return this;
   }
 
   build() {
-    return this.computer;
+    return this.carro;
   }
 }
 
 // Director → monta configurações pré-definidas
-class ComputerDirector {
-  static buildGamingPC() {
-    return new ComputerBuilder()
-      .setProcessadorLogico("Intel i9")
-      .setGPU("NVIDIA RTX 4090")
-      .setRAM("64GB")
-      .setStorage("2TB SSD")
-      .setPowerSupply("1000W")
-      .setCase("Full Tower")
-      .setOS("Windows 11 Pro")
-      .addWifiCard()
+class CarDirector {
+  static buildCarro1() {
+    return new CarroBuilder()
+      .setbrand("Fiat")
+      .setmodel("Uno")
+      .setyear("1999")
+      .setengine("v1")
+      .setcolor("branco papel")
+      .setgps(false)
       .build();
   }
 
-  static buildOfficePC() {
-    return new ComputerBuilder()
-      .setProcessadorLogico("Intel i5")
-      .setGPU("Integrada Intel UHD")
-      .setRAM("16GB")
-      .setStorage("512GB SSD")
-      .setPowerSupply("500W")
-      .setCase("Mini Tower")
-      .setOS("Windows 11 Home")
+  static buildCarro2() {
+    return new CarroBuilder()
+      .setbrand("Porche")
+      .setmodel("911")
+      .setyear("2005")
+      .setengine("v8")
+      .setcolor("vermelho rose")
+      .setgps(true)
       .build();
   }
 
-  static buildLinuxDevPC() {
-    return new ComputerBuilder()
-      .setProcessadorLogico("AMD Ryzen 7")
-      .setGPU("AMD Radeon RX 7800XT")
-      .setRAM("32GB")
-      .setStorage("1TB SSD")
-      .setPowerSupply("750W")
-      .setCase("Mid Tower")
-      .setOS("Ubuntu Linux")
-      .addWifiCard()
+  static buildCarro3() {
+    return new CarroBuilder()
+      .setbrand("Honda")
+      .setmodel("Civic")
+      .setyear(2023)
+      .setengine("1.5 Turbo")
+      .setcolor("Prata")
+      .setgps(false)
       .build();
   }
 }
 
 // Uso
-const gamer = ComputerDirector.buildGamingPC();
-const office = ComputerDirector.buildOfficePC();
-const dev = ComputerDirector.buildLinuxDevPC();
-const satc = new ComputerBuilder().setProcessadorLogico("Celeron 400").build();
+const corporativo = CarDirector.buildCarro1();
+const top = CarDirector.buildCarro2();
+const generico = CarDirector.buildCarro3();
+const expecial = new CarroBuilder().setcolor("marrom turquesa").setbrand("mclaren").build();
 
-gamer.showConfig();
-office.showConfig();
-dev.showConfig();
-satc.showConfig();
+corporativo.showDetails();
+top.showDetails();
+generico.showDetails();
+expecial.showDetails();
