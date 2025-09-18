@@ -18,7 +18,6 @@ class Lanche {
     }
   }
   
-  // Builder
   class LancheBuilder {
     constructor() {
       this.lanche = new Lanche();
@@ -49,7 +48,6 @@ class Lanche {
       return this;
     }
   
-    // Faltava isso!
     build() {
       return this.lanche;
     }
