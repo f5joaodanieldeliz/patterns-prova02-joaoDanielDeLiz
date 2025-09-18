@@ -28,3 +28,4 @@ if (tipo === "bicicleta") {
 }
 
 console.log(transporte.move());
+
