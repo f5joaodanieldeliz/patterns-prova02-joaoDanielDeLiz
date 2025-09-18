@@ -5,7 +5,7 @@ class Config {
     }
 
     this.settings = {};
-    Config.instance = this; // guarda a instância
+    Config.instance = this; 
   }
 
   setConfig(key, value) {
