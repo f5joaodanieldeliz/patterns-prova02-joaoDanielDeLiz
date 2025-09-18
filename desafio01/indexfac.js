@@ -16,7 +16,7 @@ class Onibus {
   }
 }
 
-class Transporteactory {
+class TransporteFactory {
   static types = {
     bike: Bicicleta,
     patinete:  Patinete,
@@ -26,13 +26,13 @@ class Transporteactory {
   static createTransporte(type) {
     const TransporteClass = this.types[type];
     if (!TransporteClass) {
-      throw new Error("Tipo de notificação ainda não suportado");
+      throw new Error("Tipo de transporte ainda não suportado");
     }
     return new TransporteClass();
   }
 }
 
-const tipoT= "onibus";
-const transporteT = TransporteFactory.createTransporte(tipo);
+const tipoT= "Carro";
+const transporteT = TransporteFactory.createTransporte(tipoT);
 
 console.log(transporteT.move());
